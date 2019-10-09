@@ -20,7 +20,7 @@ server.use((err, req, res, next) => {
         res.status(err.httpStatusCode).json(err.code)
     }
     else{
-        
+     
         res.status('500').json(err)
     }
    
