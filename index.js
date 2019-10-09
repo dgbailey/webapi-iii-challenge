@@ -1,10 +1,11 @@
 // code away!
 const express = require('express');
-const morgan = require('morgan');
+const morgan = require('morgan'); 
+require('dotenv').config();  
 
 //configuration
 const userRoutes = require('./users/userRouter');
-const port = '8000';
+const port = process.env.PORT || '8000';
 const server = express();
 
 
@@ -16,6 +17,7 @@ server.use('/users',userRoutes);
 
 server.use((err, req, res, next) => {
     // log the error...
+    //this is currently being used to catch database errors thrown from upstream middleware
     if(err.httpStatusCode){
         res.status(err.httpStatusCode).json(err.code)
     }
@@ -28,3 +30,4 @@ server.use((err, req, res, next) => {
 })
 
 server.listen(port, () => console.log(`listining on port ${port}`));
+//how does node     
