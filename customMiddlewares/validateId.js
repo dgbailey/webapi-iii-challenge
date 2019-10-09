@@ -9,6 +9,7 @@ const validateId = (req,res,next) => {
         db.getById(id).then(data => {
         if(!data){
             res.status('400').json('{ message: "invalid user id" }');
+            //not passing next here cancels the request from passing through other middleware
         }
         else{
             req.user = data;

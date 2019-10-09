@@ -16,7 +16,15 @@ server.use('/users',userRoutes);
 
 server.use((err, req, res, next) => {
     // log the error...
-    res.sendStatus(err.httpStatusCode).json(err)
+    if(err.httpStatusCode){
+        res.status(err.httpStatusCode).json(err.code)
+    }
+    else{
+        
+        res.status('500').json(err)
+    }
+   
+
 })
 
 server.listen(port, () => console.log(`listining on port ${port}`));
